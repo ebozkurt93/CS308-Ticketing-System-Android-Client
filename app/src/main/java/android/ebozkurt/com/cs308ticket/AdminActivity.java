@@ -74,6 +74,61 @@ public class AdminActivity extends AppCompatActivity {
             }
         });
 
+addadmin.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        SharedPreferences sharedPreferences = getSharedPreferences("keys", Context.MODE_PRIVATE);
+        String jwt = sharedPreferences.getString("jwt", "");
+        TicketApiInterface apiService = RetrofitBuilder.returnService();
+
+        User user = new User();
+        user.setMail(email.getText().toString());
+        user.setRole("ADMIN");
+        Log.i("dev", user.getMail().toString());
+        Call<ArrayList<User>> call = apiService.addAdminByEmail(jwt, user);
+        call.enqueue(new Callback<ArrayList<User>>() {
+            @Override
+            public void onResponse(Call<ArrayList<User>> call, Response<ArrayList<User>> response) {
+                Toast.makeText(AdminActivity.this, "Successful", Toast.LENGTH_SHORT).show();
+
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<User>> call, Throwable t) {
+                Toast.makeText(AdminActivity.this, "Failed", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+    }
+});
+
+        removeadmin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences sharedPreferences = getSharedPreferences("keys", Context.MODE_PRIVATE);
+                String jwt = sharedPreferences.getString("jwt", "");
+                TicketApiInterface apiService = RetrofitBuilder.returnService();
+
+                User user = new User();
+                user.setMail(email.getText().toString());
+                user.setRole("USER");
+                Log.i("dev", user.getMail());
+                Call<ArrayList<User>> call = apiService.removeAdminByEmail(jwt, user);
+                call.enqueue(new Callback<ArrayList<User>>() {
+                    @Override
+                    public void onResponse(Call<ArrayList<User>> call, Response<ArrayList<User>> response) {
+                        Toast.makeText(AdminActivity.this, "Successful", Toast.LENGTH_SHORT).show();
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<ArrayList<User>> call, Throwable t) {
+                        Toast.makeText(AdminActivity.this, "Failed", Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+            }
+        });
 
     }
 }

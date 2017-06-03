@@ -27,4 +27,10 @@ public interface TicketApiInterface {
     @GET("user/secure/getallusers")
     Call<ArrayList<User>> getAllUsers(@Header("Authorization") String authorization);
 
+    @POST("user/secure/addadminbyemail")
+    Call<ArrayList<User>> addAdminByEmail(@Header("Authorization") String authorization, @Body User user);
+
+
+    @POST("user/secure/removeadminbyemail")
+    Call<ArrayList<User>> removeAdminByEmail(@Header("Authorization") String authorization, @Body User user);
 }
