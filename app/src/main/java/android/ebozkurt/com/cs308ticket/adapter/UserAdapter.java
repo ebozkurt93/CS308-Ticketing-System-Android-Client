@@ -4,6 +4,7 @@ import android.content.Context;
 import android.ebozkurt.com.cs308ticket.R;
 import android.ebozkurt.com.cs308ticket.domain.User;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -86,6 +87,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         passwordTextView.setText(user.getPassword());
         idTextView.setText(user.getId());
         roleTextView.setText(user.getRole());
+        //Log.i("dev", user.getRole());
         nameTextView.setText(user.getName());
         addressTextView.setText(user.getAddress());
     }

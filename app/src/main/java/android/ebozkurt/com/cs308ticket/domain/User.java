@@ -18,6 +18,8 @@ public class User implements Serializable{
     private String password;
     private String mail;
     private String address;
+    @SerializedName("roles")
+    @Expose
     private String role;
 
 

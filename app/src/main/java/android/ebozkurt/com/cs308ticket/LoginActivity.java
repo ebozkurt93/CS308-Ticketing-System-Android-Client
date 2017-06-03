@@ -78,10 +78,10 @@ public class LoginActivity extends AppCompatActivity {
 
 
                                 Log.i("dev", role);
-                                if (role.equals("[\"ADMIN\"]")) {
+                                if (role.equals("ADMIN")) {
                                     Intent i = new Intent(LoginActivity.this, AdminActivity.class);
                                     startActivity(i);
-                                } else if (role.equals("[\"USER\"]")) {
+                                } else if (role.equals("USER")) {
                                     //todo events list
                                 }
 
