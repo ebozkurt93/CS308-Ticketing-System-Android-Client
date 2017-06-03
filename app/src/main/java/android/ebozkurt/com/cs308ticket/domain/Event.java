@@ -24,7 +24,7 @@ public class Event {
     @SerializedName("imageUrl2")
     @Expose
     private String imageUrl2;
-    @SerializedName("videoUrl1")
+    @SerializedName("videoUrl")
     @Expose
     private String videoUrl1;
     @SerializedName("category")
@@ -104,7 +104,7 @@ public class Event {
                 ", actor='" + actor + '\'' +
                 ", imageUrl1='" + imageUrl1 + '\'' +
                 ", imageUrl2='" + imageUrl2 + '\'' +
-                ", videoUrl1='" + videoUrl1 + '\'' +
+                ", videoUrl='" + videoUrl1 + '\'' +
                 ", category=" + category +
                 '}';
     }

@@ -1,5 +1,6 @@
 package android.ebozkurt.com.cs308ticket.network;
 
+import android.ebozkurt.com.cs308ticket.domain.Event;
 import android.ebozkurt.com.cs308ticket.domain.User;
 
 import java.util.ArrayList;
@@ -33,4 +34,7 @@ public interface TicketApiInterface {
 
     @POST("user/secure/removeadminbyemail")
     Call<ArrayList<User>> removeAdminByEmail(@Header("Authorization") String authorization, @Body User user);
+
+    @POST("event/secure/add")
+    Call<Void> addEvent(@Header("Authorization") String authorization, @Body Event event);
 }
