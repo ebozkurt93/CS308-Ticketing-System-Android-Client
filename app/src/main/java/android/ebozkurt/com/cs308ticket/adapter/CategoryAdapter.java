@@ -69,10 +69,10 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         LayoutInflater inflater = LayoutInflater.from(context);
 
         // Inflate the custom layout
-        View contactView = inflater.inflate(R.layout.category_add_card, parent, false);
+        View categoryView = inflater.inflate(R.layout.category_add_card, parent, false);
 
         // Return a new holder instance
-        ViewHolder viewHolder = new ViewHolder(contactView);
+        ViewHolder viewHolder = new ViewHolder(categoryView);
         return viewHolder;
     }
 
@@ -118,6 +118,25 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     @Override
     public int getItemCount() {
         return categorylist.size();
+    }
+
+
+
+    public ArrayList<Category> getAllCategories(CategoryAdapter.ViewHolder viewHolder) {
+        ArrayList<Category> categories = new ArrayList<>();
+
+        for(int i = 0; i < getItemCount(); i++ ) {
+            onBindViewHolder(viewHolder, i);
+            Category c = new Category(viewHolder.startseat.getText().toString(), viewHolder.endseat.getText().toString(), viewHolder.name.getText().toString(), viewHolder.price.getText().toString());
+            categories.add(c);
+        }
+
+        return categories;
+    }
+
+    public Category getCategory(CategoryAdapter.ViewHolder viewHolder) {
+        Category c = new Category(viewHolder.startseat.getText().toString(), viewHolder.endseat.getText().toString(), viewHolder.name.getText().toString(), viewHolder.price.getText().toString());
+        return c;
     }
 
 

@@ -21,6 +21,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 import retrofit2.Call;
@@ -42,8 +44,8 @@ public class AddEventActivity extends AppCompatActivity {
         Category c = new Category("1","20","VIP","100");
         categorylist.add(c);
 
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.activity_add_category_recyclerview);
-        CategoryAdapter categoryAdapter = new CategoryAdapter(this, categorylist);
+        final RecyclerView recyclerView = (RecyclerView) findViewById(R.id.activity_add_category_recyclerview);
+        final CategoryAdapter categoryAdapter = new CategoryAdapter(this, categorylist);
         recyclerView.setAdapter(categoryAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -75,7 +77,23 @@ public class AddEventActivity extends AppCompatActivity {
                 event.setImageUrl1(imageURL1.getText().toString());
                 event.setImageUrl2(imageURL2.getText().toString());
                 event.setVideoUrl1(videoURL.getText().toString());
-                event.setCategory(categorylist);
+                //event.setCategory(categorylist);
+
+
+                ArrayList<Category> categories = new ArrayList<Category>();
+
+                for(int i = 0; i< categoryAdapter.getItemCount(); i++) {
+                    //CategoryAdapter.ViewHolder viewHolder = (CategoryAdapter.ViewHolder) recyclerView.findViewHolderForAdapterPosition(i);
+                    //categoryAdapter.onBindViewHolder(viewHolder);
+
+                    Category c = categoryAdapter.getCategory((CategoryAdapter.ViewHolder) recyclerView.findViewHolderForAdapterPosition(i));
+                    categories.add(c);
+                }
+                event.setCategory(categories);
+
+
+
+                Log.i("dev", event.toString());
 
 
                 Call<Void> call = apiService.addEvent(jwt, event);

@@ -27,7 +27,7 @@ public class Event {
     @SerializedName("videoUrl")
     @Expose
     private String videoUrl1;
-    @SerializedName("category")
+    @SerializedName("categories")
     @Expose
     private List<Category> category = null;
 
