@@ -3,6 +3,7 @@ package android.ebozkurt.com.cs308ticket;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.ebozkurt.com.cs308ticket.domain.Event;
 import android.ebozkurt.com.cs308ticket.domain.User;
 import android.ebozkurt.com.cs308ticket.network.RetrofitBuilder;
 import android.ebozkurt.com.cs308ticket.network.TicketApiInterface;
@@ -22,8 +23,8 @@ import retrofit2.Response;
 
 public class AdminActivity extends AppCompatActivity {
 
-    private Button getallusers, addadmin, removeadmin, addevent;
-    private EditText email;
+    private Button getallusers, addadmin, removeadmin, addevent, removeevent;
+    private EditText email, eventid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +36,8 @@ public class AdminActivity extends AppCompatActivity {
         removeadmin = (Button) findViewById(R.id.activity_admin_removeadmin_button);
         email = (EditText) findViewById(R.id.activity_admin_email_edittext);
         addevent = (Button) findViewById(R.id.activity_admin_addevent_button);
+        removeevent = (Button) findViewById(R.id.activity_admin_removeevent_button);
+        eventid = (EditText) findViewById(R.id.activity_admin_eventid_edittext);
 
         getallusers.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,33 +78,33 @@ public class AdminActivity extends AppCompatActivity {
             }
         });
 
-addadmin.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        SharedPreferences sharedPreferences = getSharedPreferences("keys", Context.MODE_PRIVATE);
-        String jwt = sharedPreferences.getString("jwt", "");
-        TicketApiInterface apiService = RetrofitBuilder.returnService();
-
-        User user = new User();
-        user.setMail(email.getText().toString());
-        user.setRole("ADMIN");
-        Log.i("dev", user.getMail().toString());
-        Call<ArrayList<User>> call = apiService.addAdminByEmail(jwt, user);
-        call.enqueue(new Callback<ArrayList<User>>() {
+        addadmin.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onResponse(Call<ArrayList<User>> call, Response<ArrayList<User>> response) {
-                Toast.makeText(AdminActivity.this, "Successful", Toast.LENGTH_SHORT).show();
+            public void onClick(View v) {
+                SharedPreferences sharedPreferences = getSharedPreferences("keys", Context.MODE_PRIVATE);
+                String jwt = sharedPreferences.getString("jwt", "");
+                TicketApiInterface apiService = RetrofitBuilder.returnService();
 
-            }
+                User user = new User();
+                user.setMail(email.getText().toString());
+                user.setRole("ADMIN");
+                Log.i("dev", user.getMail().toString());
+                Call<ArrayList<User>> call = apiService.addAdminByEmail(jwt, user);
+                call.enqueue(new Callback<ArrayList<User>>() {
+                    @Override
+                    public void onResponse(Call<ArrayList<User>> call, Response<ArrayList<User>> response) {
+                        Toast.makeText(AdminActivity.this, "Successful", Toast.LENGTH_SHORT).show();
 
-            @Override
-            public void onFailure(Call<ArrayList<User>> call, Throwable t) {
-                Toast.makeText(AdminActivity.this, "Failed", Toast.LENGTH_SHORT).show();
+                    }
 
+                    @Override
+                    public void onFailure(Call<ArrayList<User>> call, Throwable t) {
+                        Toast.makeText(AdminActivity.this, "Failed", Toast.LENGTH_SHORT).show();
+
+                    }
+                });
             }
         });
-    }
-});
 
         removeadmin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -136,6 +139,31 @@ addadmin.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent i = new Intent(AdminActivity.this, AddEventActivity.class);
                 startActivity(i);
+            }
+        });
+
+        removeevent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences sharedPreferences = getSharedPreferences("keys", Context.MODE_PRIVATE);
+                String jwt = sharedPreferences.getString("jwt", "");
+                TicketApiInterface apiService = RetrofitBuilder.returnService();
+
+                Event event = new Event();
+                event.setId(eventid.getText().toString());
+                Call<Void> call = apiService.removeEvent(jwt, event);
+                call.enqueue(new Callback<Void>() {
+                    @Override
+                    public void onResponse(Call<Void> call, Response<Void> response) {
+                        Toast.makeText(AdminActivity.this, "Successful", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onFailure(Call<Void> call, Throwable t) {
+                        Toast.makeText(AdminActivity.this, "Failed", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
             }
         });
 

@@ -37,4 +37,7 @@ public interface TicketApiInterface {
 
     @POST("event/secure/add")
     Call<Void> addEvent(@Header("Authorization") String authorization, @Body Event event);
+
+    @POST("event/secure/remove")
+    Call<Void> removeEvent(@Header("Authorization") String authorization, @Body Event event);
 }
