@@ -8,11 +8,16 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Html;
+import android.widget.Button;
+import android.widget.TextView;
 
 public class EventActivity extends AppCompatActivity {
 
     private FragmentPagerAdapter adapterViewPager;
     private static Event event;
+    private TextView name, info, actor;
+    private Button selectSeat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +29,15 @@ public class EventActivity extends AppCompatActivity {
         ViewPager viewPager = (ViewPager) findViewById(R.id.activity_event_image_viewpager);
         adapterViewPager = new MyPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapterViewPager);
+
+        name = (TextView) findViewById(R.id.activity_event_name_textview);
+        info = (TextView) findViewById(R.id.activity_event_info_textview);
+        actor = (TextView) findViewById(R.id.activity_event_actor_textview);
+
+        name.setText(Html.fromHtml("<b>Name:</b> " + event.getName()));
+        info.setText(Html.fromHtml("<b>Info:</b> " + event.getInfo()));
+        actor.setText(Html.fromHtml("<b>Actor:</b> " + event.getActor()));
+
     }
 
     public static class MyPagerAdapter extends FragmentPagerAdapter {
@@ -47,8 +61,8 @@ public class EventActivity extends AppCompatActivity {
                     return ImageFragment.newInstance(event.getImageUrl1());
                 case 1: // Fragment # 0 - This will show FirstFragment different title
                     return ImageFragment.newInstance(event.getImageUrl2());
-               // case 2: // Fragment # 1 - This will show SecondFragment
-                   // return ImageFragment.newInstance(event.getVideoUrl1());
+                // case 2: // Fragment # 1 - This will show SecondFragment
+                // return ImageFragment.newInstance(event.getVideoUrl1());
                 default:
                     return null;
             }
