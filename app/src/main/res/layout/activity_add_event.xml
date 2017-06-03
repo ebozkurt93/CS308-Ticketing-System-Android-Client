@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="android.ebozkurt.com.cs308ticket.AddEventActivity">
+
+    <EditText
+        android:id="@+id/activity_add_event_name_edittext"
+        android:layout_width="match_parent"
+        android:hint="name"
+        android:layout_height="wrap_content"/>
+
+    <EditText
+        android:id="@+id/activity_add_event_info_edittext"
+        android:layout_width="match_parent"
+        android:hint="info"
+        android:layout_height="wrap_content"/>
+
+    <EditText
+        android:id="@+id/activity_add_event_actor_edittext"
+        android:layout_width="match_parent"
+        android:hint="actor"
+        android:layout_height="wrap_content"/>
+
+    <EditText
+        android:id="@+id/activity_add_event_imageURL1_edittext"
+        android:layout_width="match_parent"
+        android:hint="imageURL1"
+        android:layout_height="wrap_content"/>
+
+    <EditText
+        android:id="@+id/activity_add_event_imageURL2_edittext"
+        android:hint="imageURL2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <EditText
+        android:id="@+id/activity_add_event_videoURL1_edittext"
+        android:hint="VideoURL1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/activity_add_category_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="200dp">
+
+        </android.support.v7.widget.RecyclerView>
+
+    </FrameLayout>
+
+    <Button
+        android:id="@+id/activity_add_event_createevent_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Create Event"
+        />
+
+
+</LinearLayout>

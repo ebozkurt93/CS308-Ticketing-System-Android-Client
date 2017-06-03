@@ -9,7 +9,6 @@
     tools:context="android.ebozkurt.com.cs308ticket.RegisterActivity">
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/activity_register_name_textinputlayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Name"
@@ -23,7 +22,6 @@
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/activity_register_lastname_textinputlayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Lastname"
@@ -37,7 +35,6 @@
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/activity_register_email_textinputlayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Email"
@@ -51,7 +48,6 @@
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/activity_register_password_textinputlayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Password"
@@ -65,7 +61,6 @@
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/activity_register_address_textinputlayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Address"

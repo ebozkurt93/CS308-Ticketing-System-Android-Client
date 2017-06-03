@@ -22,7 +22,7 @@ import retrofit2.Response;
 
 public class AdminActivity extends AppCompatActivity {
 
-    private Button getallusers, addadmin, removeadmin;
+    private Button getallusers, addadmin, removeadmin, addevent;
     private EditText email;
 
     @Override
@@ -34,6 +34,7 @@ public class AdminActivity extends AppCompatActivity {
         addadmin = (Button) findViewById(R.id.activity_admin_addadmin_button);
         removeadmin = (Button) findViewById(R.id.activity_admin_removeadmin_button);
         email = (EditText) findViewById(R.id.activity_admin_email_edittext);
+        addevent = (Button) findViewById(R.id.activity_admin_addevent_button);
 
         getallusers.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,6 +128,14 @@ addadmin.setOnClickListener(new View.OnClickListener() {
 
                     }
                 });
+            }
+        });
+
+        addevent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(AdminActivity.this, AddEventActivity.class);
+                startActivity(i);
             }
         });
 
