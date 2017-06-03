@@ -1,0 +1,9 @@
+<resources>
+
+
+    <string name="main_url">http://10.0.2.2:8080</string>
+
+    <string name="app_name">CS308 Ticket</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="login">Login</string>
+</resources>
