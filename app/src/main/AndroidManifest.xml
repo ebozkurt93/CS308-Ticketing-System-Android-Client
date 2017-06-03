@@ -34,6 +34,8 @@
         </activity>
         <activity android:name=".UserMainActivity">
         </activity>
+        <activity android:name=".EventActivity">
+        </activity>
     </application>
 
 </manifest>

@@ -1,6 +1,8 @@
 package android.ebozkurt.com.cs308ticket.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.ebozkurt.com.cs308ticket.EventActivity;
 import android.ebozkurt.com.cs308ticket.R;
 import android.ebozkurt.com.cs308ticket.domain.Category;
 import android.ebozkurt.com.cs308ticket.domain.Event;
@@ -31,7 +33,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         public ImageView image;
         // We also create a constructor that accepts the entire item row
         // and does the view lookups to find each subview
-        public ViewHolder(View itemView) {
+        public ViewHolder(final View itemView) {
             // Stores the itemView in a public final member variable that can be used
             // to access the context from any ViewHolder instance.
             super(itemView);
@@ -45,7 +47,12 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //todo
+                    Intent i = new Intent(getContext(), EventActivity.class);
+                    Event event = new Event();
+                    //todo 
+                    //i.putExtra("event", event);
+                    context.startActivity(i);
+
                 }
             });
         }
