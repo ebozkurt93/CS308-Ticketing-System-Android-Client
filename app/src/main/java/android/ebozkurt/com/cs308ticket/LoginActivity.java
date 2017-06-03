@@ -2,6 +2,7 @@ package android.ebozkurt.com.cs308ticket;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.ebozkurt.com.cs308ticket.domain.User;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
@@ -11,10 +12,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -59,11 +61,20 @@ public class LoginActivity extends AppCompatActivity {
 
                                 Toast.makeText(LoginActivity.this, "Success", Toast.LENGTH_SHORT).show();
                                 String key = "secretkey";
-                                Claims claims = Jwts.parser().setSigningKey(key).parseClaimsJws(jwt).getBody();
-                                String role = (String) claims.get("roles");
-                                if (role.equals("ADMIN")) {
+                               // Claims claims = Jwts.parser().setSigningKey(key).parseClaimsJws(jwt).getBody();
+
+                                String[] tokenParts = jwt.split("\\.");
+                                Log.i("dev", tokenParts[1]);
+                                byte[] content = Base64.decode(tokenParts[1], Base64.DEFAULT);
+                                String payload = new String(content, "UTF-8");
+                                JSONObject payloadObject = new JSONObject(payload);
+                                String role = payloadObject.getString("roles");
+
+
+                                Log.i("dev", role);
+                                if (role.equals("[ADMIN]")) {
                                     //todo admin panel
-                                } else if (role.equals("USER")) {
+                                } else if (role.equals("[USER]")) {
                                     //todo events list
                                 }
 
@@ -71,6 +82,8 @@ public class LoginActivity extends AppCompatActivity {
                                 Toast.makeText(LoginActivity.this, "There was an error", Toast.LENGTH_SHORT).show();
 
                         } catch (IOException e) {
+                            e.printStackTrace();
+                        } catch (JSONException e) {
                             e.printStackTrace();
                         }
 

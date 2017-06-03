@@ -1,4 +1,4 @@
-package android.ebozkurt.com.cs308ticket;
+package android.ebozkurt.com.cs308ticket.domain;
 
 /**
  * Created by erdem on 2.06.2017.

@@ -1,6 +1,6 @@
 package android.ebozkurt.com.cs308ticket;
 
-import org.w3c.dom.Text;
+import android.ebozkurt.com.cs308ticket.domain.User;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;

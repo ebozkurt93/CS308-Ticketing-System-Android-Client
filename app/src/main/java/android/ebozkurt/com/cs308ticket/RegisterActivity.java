@@ -1,6 +1,6 @@
 package android.ebozkurt.com.cs308ticket;
 
-import android.content.Intent;
+import android.ebozkurt.com.cs308ticket.domain.User;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,16 +10,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.util.Map;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 
 public class RegisterActivity extends AppCompatActivity {
