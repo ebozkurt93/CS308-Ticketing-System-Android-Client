@@ -1,4 +1,4 @@
-package android.ebozkurt.com.cs308ticket;
+package android.ebozkurt.com.cs308ticket.network;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

@@ -1,8 +1,11 @@
 package android.ebozkurt.com.cs308ticket;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.ebozkurt.com.cs308ticket.domain.User;
+import android.ebozkurt.com.cs308ticket.network.RetrofitBuilder;
+import android.ebozkurt.com.cs308ticket.network.TicketApiInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
@@ -36,6 +39,9 @@ public class LoginActivity extends AppCompatActivity {
         password = (EditText) findViewById(R.id.activity_login_password_edittext);
         login = (Button) findViewById(R.id.activity_login_login_button);
 
+        email.setText("a@a.com");
+        password.setText("1");
+
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,14 +60,14 @@ public class LoginActivity extends AppCompatActivity {
                                 String jwt = new String(response.body().bytes());
                                 Log.i("dev", jwt);
 
-                                SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+                                SharedPreferences sharedPref = getSharedPreferences("keys", Context.MODE_PRIVATE);
                                 SharedPreferences.Editor editor = sharedPref.edit();
-                                editor.putString("jwt", jwt);
+                                editor.putString("jwt", "Bearer " + jwt);
                                 editor.commit();
 
                                 Toast.makeText(LoginActivity.this, "Success", Toast.LENGTH_SHORT).show();
                                 String key = "secretkey";
-                               // Claims claims = Jwts.parser().setSigningKey(key).parseClaimsJws(jwt).getBody();
+                                // Claims claims = Jwts.parser().setSigningKey(key).parseClaimsJws(jwt).getBody();
 
                                 String[] tokenParts = jwt.split("\\.");
                                 Log.i("dev", tokenParts[1]);
@@ -72,9 +78,10 @@ public class LoginActivity extends AppCompatActivity {
 
 
                                 Log.i("dev", role);
-                                if (role.equals("[ADMIN]")) {
-                                    //todo admin panel
-                                } else if (role.equals("[USER]")) {
+                                if (role.equals("[\"ADMIN\"]")) {
+                                    Intent i = new Intent(LoginActivity.this, AdminActivity.class);
+                                    startActivity(i);
+                                } else if (role.equals("[\"USER\"]")) {
                                     //todo events list
                                 }
 

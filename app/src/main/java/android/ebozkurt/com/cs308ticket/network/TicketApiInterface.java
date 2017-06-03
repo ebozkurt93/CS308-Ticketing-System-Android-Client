@@ -1,4 +1,4 @@
-package android.ebozkurt.com.cs308ticket;
+package android.ebozkurt.com.cs308ticket.network;
 
 import android.ebozkurt.com.cs308ticket.domain.User;
 
@@ -25,6 +25,6 @@ public interface TicketApiInterface {
     Call<ResponseBody> loginUser(@Body User user);
 
     @GET("user/secure/getallusers")
-    Call<ArrayList<User>> getAllUsers();
+    Call<ArrayList<User>> getAllUsers(@Header("Authorization") String authorization);
 
 }

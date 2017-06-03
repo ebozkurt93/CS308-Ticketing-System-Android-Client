@@ -1,6 +1,8 @@
 package android.ebozkurt.com.cs308ticket;
 
 import android.ebozkurt.com.cs308ticket.domain.User;
+import android.ebozkurt.com.cs308ticket.network.RetrofitBuilder;
+import android.ebozkurt.com.cs308ticket.network.TicketApiInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;

@@ -1,20 +1,24 @@
 package android.ebozkurt.com.cs308ticket.domain;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by erdem on 2.06.2017.
  */
 
-public class User {
+public class User implements Serializable{
 
-    private int id;
+    private String id;
     private String name;
     private String surname;
     private String password;
     private String mail;
     private String address;
-    private ArrayList<Role> roles;
+    private String role;
 
 
     public User(String name, String surname, String password, String mail, String address) {
@@ -33,12 +37,12 @@ public class User {
     public User() {
     }
 
-    public int getId() {
+    public String getId() {
 
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -78,15 +82,28 @@ public class User {
         return address;
     }
 
-    public ArrayList<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(ArrayList<Role> roles) {
-        this.roles = roles;
-    }
-
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", password='" + password + '\'' +
+                ", mail='" + mail + '\'' +
+                ", address='" + address + '\'' +
+                ", role=" + role +
+                '}';
     }
 }

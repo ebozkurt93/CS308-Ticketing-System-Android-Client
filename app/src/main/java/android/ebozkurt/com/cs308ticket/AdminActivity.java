@@ -1,15 +1,21 @@
 package android.ebozkurt.com.cs308ticket;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.ebozkurt.com.cs308ticket.domain.User;
+import android.ebozkurt.com.cs308ticket.network.RetrofitBuilder;
+import android.ebozkurt.com.cs308ticket.network.TicketApiInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -32,21 +38,42 @@ public class AdminActivity extends AppCompatActivity {
         getallusers.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                SharedPreferences sharedPreferences = getSharedPreferences("keys", Context.MODE_PRIVATE);
+                String jwt = sharedPreferences.getString("jwt", "");
                 TicketApiInterface apiService = RetrofitBuilder.returnService();
-                Call<ArrayList<User>> call = apiService.getAllUsers();
+                Call<ArrayList<User>> call = apiService.getAllUsers(jwt);
+                Log.i("dev", jwt + " asdasda");
                 call.enqueue(new Callback<ArrayList<User>>() {
                     @Override
                     public void onResponse(Call<ArrayList<User>> call, Response<ArrayList<User>> response) {
 
+
+                        Log.i("dev", response.toString());
+                        ArrayList<User> users = response.body();
+
+                        Intent i = new Intent(AdminActivity.this, UserListActivity.class);
+                        i.putExtra("userlist", users);
+                        startActivity(i);
+
+                        /*
+                        for( int i = 0; i < users.size(); i++) {
+                            User user = users.get(i);
+                            Log.i("dev", user.toString());
+
+                        }
+                        Log.i("dev", users.toString());
+                        */
                     }
 
                     @Override
                     public void onFailure(Call<ArrayList<User>> call, Throwable t) {
-
+                        Toast.makeText(AdminActivity.this, "Failed", Toast.LENGTH_SHORT).show();
                     }
                 });
             }
         });
+
 
     }
 }
