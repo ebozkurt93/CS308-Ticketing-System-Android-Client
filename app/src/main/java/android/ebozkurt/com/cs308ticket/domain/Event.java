@@ -1,10 +1,11 @@
 package android.ebozkurt.com.cs308ticket.domain;
 
+import java.io.Serializable;
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Event {
+public class Event implements Serializable {
 
     @SerializedName("id")
     @Expose

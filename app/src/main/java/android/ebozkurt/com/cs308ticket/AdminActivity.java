@@ -23,7 +23,7 @@ import retrofit2.Response;
 
 public class AdminActivity extends AppCompatActivity {
 
-    private Button getallusers, addadmin, removeadmin, addevent, removeevent;
+    private Button getallusers, addadmin, removeadmin, addevent, removeevent, getallevents;
     private EditText email, eventid;
 
     @Override
@@ -38,6 +38,7 @@ public class AdminActivity extends AppCompatActivity {
         addevent = (Button) findViewById(R.id.activity_admin_addevent_button);
         removeevent = (Button) findViewById(R.id.activity_admin_removeevent_button);
         eventid = (EditText) findViewById(R.id.activity_admin_eventid_edittext);
+        getallevents = (Button) findViewById(R.id.activity_admin_eventlist_button);
 
         getallusers.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -164,6 +165,29 @@ public class AdminActivity extends AppCompatActivity {
                     }
                 });
 
+            }
+        });
+
+        getallevents.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TicketApiInterface apiService = RetrofitBuilder.returnService();
+                Call<ArrayList<Event>> call = apiService.getAllEvents();
+                call.enqueue(new Callback<ArrayList<Event>>() {
+                    @Override
+                    public void onResponse(Call<ArrayList<Event>> call, Response<ArrayList<Event>> response) {
+                        Toast.makeText(AdminActivity.this, "Successful", Toast.LENGTH_SHORT).show();
+                        Intent i = new Intent(AdminActivity.this, EventListActivity.class);
+                        ArrayList<Event> events = response.body();
+                        i.putExtra("eventlist", events);
+                        startActivity(i);
+                    }
+
+                    @Override
+                    public void onFailure(Call<ArrayList<Event>> call, Throwable t) {
+                        Toast.makeText(AdminActivity.this, "Failed", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
 

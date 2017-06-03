@@ -30,6 +30,10 @@
         </activity>
         <activity android:name=".AddEventActivity">
         </activity>
+        <activity android:name=".EventListActivity">
+        </activity>
+        <activity android:name=".UserMainActivity">
+        </activity>
     </application>
 
 </manifest>

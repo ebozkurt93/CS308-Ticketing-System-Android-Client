@@ -31,7 +31,6 @@ public interface TicketApiInterface {
     @POST("user/secure/addadminbyemail")
     Call<ArrayList<User>> addAdminByEmail(@Header("Authorization") String authorization, @Body User user);
 
-
     @POST("user/secure/removeadminbyemail")
     Call<ArrayList<User>> removeAdminByEmail(@Header("Authorization") String authorization, @Body User user);
 
@@ -40,4 +39,10 @@ public interface TicketApiInterface {
 
     @POST("event/secure/remove")
     Call<Void> removeEvent(@Header("Authorization") String authorization, @Body Event event);
+
+    @GET("event/getallevents")
+    Call<ArrayList<Event>> getAllEvents();
+
+    @GET("event/geteventbyid")
+    Call<Event> getEventById(@Body Event event);
 }
