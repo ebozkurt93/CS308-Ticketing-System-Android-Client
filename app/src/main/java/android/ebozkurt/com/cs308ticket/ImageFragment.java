@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 /**
  * Created by erdem on 4.06.2017.
  */
@@ -39,6 +41,7 @@ public class ImageFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_image_viewpager, container, false);
         ImageView imageView = (ImageView) view.findViewById(R.id.fragment_image_view_pager_image);
+        Picasso.with(getContext()).load(image).into(imageView);
         return view;
     }
 }

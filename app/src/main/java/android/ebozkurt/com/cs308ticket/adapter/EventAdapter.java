@@ -43,16 +43,19 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
             actor = (TextView) itemView.findViewById(R.id.event_card_actor);
 
             image = (ImageView) itemView.findViewById(R.id.event_card_imageview);
-            
+
+
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    int pos = getAdapterPosition();
                     Intent i = new Intent(getContext(), EventActivity.class);
-                    Event event = new Event();
-                    //todo 
-                    //i.putExtra("event", event);
+                    //todo
+                    Event e = eventlist.get(pos);
+                    i.putExtra("event", e);
+                    Log.i("dev", e.toString());
                     context.startActivity(i);
-
                 }
             });
         }
