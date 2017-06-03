@@ -16,11 +16,11 @@ public class RetrofitBuilder {
             .addConverterFactory(GsonConverterFactory.create())
             .build();
 
-    public static MyApiEndpointInterface returnService () {
+    public static TicketApiInterface returnService () {
         RetrofitBuilder retrofitBuilder = new RetrofitBuilder();
         Retrofit retrofit = retrofitBuilder.retrofit;
-        MyApiEndpointInterface apiService =
-                retrofit.create(MyApiEndpointInterface.class);
+        TicketApiInterface apiService =
+                retrofit.create(TicketApiInterface.class);
         return apiService;
     }
 }

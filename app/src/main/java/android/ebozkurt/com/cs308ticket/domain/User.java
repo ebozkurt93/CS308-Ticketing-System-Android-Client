@@ -1,5 +1,7 @@
 package android.ebozkurt.com.cs308ticket.domain;
 
+import java.util.ArrayList;
+
 /**
  * Created by erdem on 2.06.2017.
  */
@@ -12,6 +14,8 @@ public class User {
     private String password;
     private String mail;
     private String address;
+    private ArrayList<Role> roles;
+
 
     public User(String name, String surname, String password, String mail, String address) {
         this.name = name;
@@ -72,6 +76,14 @@ public class User {
 
     public String getAddress() {
         return address;
+    }
+
+    public ArrayList<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(ArrayList<Role> roles) {
+        this.roles = roles;
     }
 
     public void setAddress(String address) {

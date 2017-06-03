@@ -2,21 +2,29 @@ package android.ebozkurt.com.cs308ticket;
 
 import android.ebozkurt.com.cs308ticket.domain.User;
 
+import java.util.ArrayList;
+
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
+import retrofit2.http.Header;
+import retrofit2.http.Headers;
 import retrofit2.http.POST;
 
 /**
  * Created by erdem on 3.06.2017.
  */
 
-public interface MyApiEndpointInterface {
+public interface TicketApiInterface {
 
     @POST("user/register")
     Call<Void> registerUser(@Body User user);
 
     @POST("user/login")
     Call<ResponseBody> loginUser(@Body User user);
+
+    @GET("user/secure/getallusers")
+    Call<ArrayList<User>> getAllUsers();
 
 }

@@ -38,7 +38,7 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 User user = new User(name.getText().toString().trim(), lastname.getText().toString().trim(), password.getText().toString().trim(), email.getText().toString().trim(), address.getText().toString().trim());
-                MyApiEndpointInterface apiService = RetrofitBuilder.returnService();
+                TicketApiInterface apiService = RetrofitBuilder.returnService();
 
                 Call<Void> call = apiService.registerUser(user);
                 call.enqueue(new Callback<Void>() {

@@ -41,7 +41,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 User user = new User(email.getText().toString().trim(), password.getText().toString().trim());
-                MyApiEndpointInterface apiService = RetrofitBuilder.returnService();
+                TicketApiInterface apiService = RetrofitBuilder.returnService();
 
                 Call<ResponseBody> call = apiService.loginUser(user);
                 call.enqueue(new Callback<ResponseBody>() {
