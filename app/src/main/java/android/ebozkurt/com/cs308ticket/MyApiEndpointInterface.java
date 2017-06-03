@@ -1,5 +1,8 @@
 package android.ebozkurt.com.cs308ticket;
 
+import org.w3c.dom.Text;
+
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.POST;
@@ -11,9 +14,9 @@ import retrofit2.http.POST;
 public interface MyApiEndpointInterface {
 
     @POST("user/register")
-    Call<User> registerUser(@Body User user);
+    Call<Void> registerUser(@Body User user);
 
     @POST("user/login")
-    Call<User> loginUser(@Body User user);
+    Call<ResponseBody> loginUser(@Body User user);
 
 }

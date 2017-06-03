@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 
 import org.json.JSONException;
@@ -42,39 +43,26 @@ public class RegisterActivity extends AppCompatActivity {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-/*
-                JSONObject jsonObject = new JSONObject();
-                try {
-                    jsonObject.put("name", name.getText());
-                    jsonObject.put("surname", lastname.getText());
-                    jsonObject.put("password", password.getText());
-                    jsonObject.put("mail", email.getText());
-                    jsonObject.put("address", address.getText());
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                //   JSONObject asd = WebserviceHelper.postJSONObject(getResources().getString(R.string.main_url) + "/user/register", jsonObject);
-
-*/
 
                 User user = new User(name.getText().toString().trim(), lastname.getText().toString().trim(), password.getText().toString().trim(), email.getText().toString().trim(), address.getText().toString().trim());
                 MyApiEndpointInterface apiService = RetrofitBuilder.returnService();
 
-                Call<User> call = apiService.registerUser(user);
-                call.enqueue(new Callback<User>() {
+                Call<Void> call = apiService.registerUser(user);
+                call.enqueue(new Callback<Void>() {
                     @Override
-                    public void onResponse(Call<User> call, Response<User> response) {
+                    public void onResponse(Call<Void> call, Response<Void> response) {
                         Log.i("dev", response.toString());
                         Log.i("dev", "onResponse: ");
+                        Toast.makeText(RegisterActivity.this, "Registered", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
-                    public void onFailure(Call<User> call, Throwable t) {
+                    public void onFailure(Call<Void> call, Throwable t) {
                         Log.i("dev", t.toString());
+                        Toast.makeText(RegisterActivity.this, "Failed to register", Toast.LENGTH_SHORT).show();
 
                     }
                 });
-                //retrofitBuilder
             }
         });
     }
