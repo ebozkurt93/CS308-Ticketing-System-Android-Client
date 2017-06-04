@@ -36,6 +36,8 @@
         </activity>
         <activity android:name=".EventActivity">
         </activity>
+        <activity android:name=".SelectSeatActivity">
+        </activity>
     </application>
 
 </manifest>

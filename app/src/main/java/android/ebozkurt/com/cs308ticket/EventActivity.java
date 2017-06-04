@@ -9,6 +9,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -37,6 +38,16 @@ public class EventActivity extends AppCompatActivity {
         name.setText(Html.fromHtml("<b>Name:</b> " + event.getName()));
         info.setText(Html.fromHtml("<b>Info:</b> " + event.getInfo()));
         actor.setText(Html.fromHtml("<b>Actor:</b> " + event.getActor()));
+
+        selectSeat = (Button) findViewById(R.id.activity_event_selectseat_button);
+        selectSeat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(EventActivity.this, SelectSeatActivity.class);
+                i.putExtra("event", event);
+                startActivity(i);
+            }
+        });
 
     }
 

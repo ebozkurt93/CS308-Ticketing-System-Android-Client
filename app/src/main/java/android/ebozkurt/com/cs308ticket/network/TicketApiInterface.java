@@ -1,6 +1,7 @@
 package android.ebozkurt.com.cs308ticket.network;
 
 import android.ebozkurt.com.cs308ticket.domain.Event;
+import android.ebozkurt.com.cs308ticket.domain.Ticket;
 import android.ebozkurt.com.cs308ticket.domain.User;
 
 import java.util.ArrayList;
@@ -28,6 +29,9 @@ public interface TicketApiInterface {
     @GET("user/secure/getallusers")
     Call<ArrayList<User>> getAllUsers(@Header("Authorization") String authorization);
 
+    @GET("user/secure/getmyinfo")
+    Call<User> getMyInfo(@Header("Authorization") String authorization);
+
     @POST("user/secure/addadminbyemail")
     Call<ArrayList<User>> addAdminByEmail(@Header("Authorization") String authorization, @Body User user);
 
@@ -45,4 +49,13 @@ public interface TicketApiInterface {
 
     @GET("event/geteventbyid")
     Call<Event> getEventById(@Body Event event);
+
+    @POST("ticket/secure/getAllTicketsForEvent")
+    Call<ArrayList<Ticket>> getAllTicketsForEvent(@Header("Authorization") String authorization, @Body Event event);
+
+    @POST("ticket/secure/createTicket")
+    Call<Void> createTicket(@Header("Authorization") String authorization, @Body Ticket ticket);
+
+    @POST("ticket/secure/getAllTicketsForUser")
+    Call<ArrayList<Ticket>> getAllTicketsForUser(@Header("Authorization") String authorization, @Body User user);
 }

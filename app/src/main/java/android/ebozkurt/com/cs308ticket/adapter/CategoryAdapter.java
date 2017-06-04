@@ -81,6 +81,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         // Get the data model based on position
         final Category category = categorylist.get(position);
 
+
         // Set item views based on your views and data model
         TextView nameTextView = viewHolder.name;
         TextView priceTextView = viewHolder.price;

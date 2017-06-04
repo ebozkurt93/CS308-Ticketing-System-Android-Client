@@ -61,9 +61,8 @@ public class LoginActivity extends AppCompatActivity {
                                 Log.i("dev", jwt);
 
                                 SharedPreferences sharedPref = getSharedPreferences("keys", Context.MODE_PRIVATE);
-                                SharedPreferences.Editor editor = sharedPref.edit();
+                                final SharedPreferences.Editor editor = sharedPref.edit();
                                 editor.putString("jwt", "Bearer " + jwt);
-                                editor.commit();
 
                                 Toast.makeText(LoginActivity.this, "Success", Toast.LENGTH_SHORT).show();
                                 String key = "secretkey";
@@ -76,13 +75,35 @@ public class LoginActivity extends AppCompatActivity {
                                 JSONObject payloadObject = new JSONObject(payload);
                                 String role = payloadObject.getString("roles");
 
+                                TicketApiInterface apiService = RetrofitBuilder.returnService();
+
+                                Call<User> call1 = apiService.getMyInfo("Bearer " + jwt);
+                                call1.enqueue(new Callback<User>() {
+                                    @Override
+                                    public void onResponse(Call<User> call, Response<User> response) {
+                                        User u = response.body();
+                                        Log.i("dev", response.toString());
+                                        editor.putString("id", u.getId());
+                                        editor.commit();
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<User> call, Throwable t) {
+
+                                    }
+                                });
+
+
+
+
 
                                 Log.i("dev", role);
                                 if (role.equals("ADMIN")) {
                                     Intent i = new Intent(LoginActivity.this, AdminActivity.class);
                                     startActivity(i);
                                 } else if (role.equals("USER")) {
-                                    //todo events list
+                                    Intent i = new Intent(LoginActivity.this, UserMainActivity.class);
+                                    startActivity(i);
                                 }
 
                             } else
