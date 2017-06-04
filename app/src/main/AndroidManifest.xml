@@ -38,6 +38,8 @@
         </activity>
         <activity android:name=".SelectSeatActivity">
         </activity>
+        <activity android:name=".TicketListActivity">
+        </activity>
     </application>
 
 </manifest>

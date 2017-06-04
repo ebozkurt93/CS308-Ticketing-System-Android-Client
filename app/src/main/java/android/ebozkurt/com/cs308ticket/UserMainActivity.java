@@ -72,7 +72,9 @@ public class UserMainActivity extends AppCompatActivity {
                     public void onResponse(Call<ArrayList<Ticket>> call, Response<ArrayList<Ticket>> response) {
                         Toast.makeText(UserMainActivity.this, "Successful", Toast.LENGTH_SHORT).show();
                         ArrayList<Ticket> tickets = response.body();
-                        //todo add ticket screen
+                        Intent i = new Intent(UserMainActivity.this, TicketListActivity.class);
+                        i.putExtra("ticketlist", tickets);
+                        startActivity(i);
                     }
 
                     @Override

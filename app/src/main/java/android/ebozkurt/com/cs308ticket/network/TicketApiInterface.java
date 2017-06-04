@@ -58,4 +58,10 @@ public interface TicketApiInterface {
 
     @POST("ticket/secure/getAllTicketsForUser")
     Call<ArrayList<Ticket>> getAllTicketsForUser(@Header("Authorization") String authorization, @Body User user);
+
+    @POST("ticket/getEvent")
+    Call<Event> getEvent(@Body Ticket ticket);
+
+    @POST("ticket/secure/getAllTickets")
+    Call<ArrayList<Ticket>> getAllTickets(@Header("Authorization") String authorization);
 }

@@ -81,7 +81,7 @@ public class SelectSeatActivity extends AppCompatActivity {
             public void onResponse(Call<ArrayList<Ticket>> call, Response<ArrayList<Ticket>> response) {
                 Toast.makeText(SelectSeatActivity.this, "Retrieved sold tickets", Toast.LENGTH_SHORT).show();
                 tickets = response.body();
-             //   Log.i("dev", response.body().get(0).getSeatName().toString() + "\n" + response.code());
+                //   Log.i("dev", response.body().get(0).getSeatName().toString() + "\n" + response.code());
             }
 
             @Override
@@ -96,6 +96,13 @@ public class SelectSeatActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
+                for (int y = 0; y < tickets.size(); y++) {
+                    Ticket t = tickets.get(y);
+                    if(!soldSeats.contains(t.getSeatName())) {
+                        soldSeats.add(t.getSeatName());
+                    }
+                }
+
                 if (position != 0) {
                     // Category category = categories.get(position - 1);
                     selectedCategory = new Category("-", "-", "-", "-");
@@ -108,11 +115,6 @@ public class SelectSeatActivity extends AppCompatActivity {
 
                     }
 
-
-                    for (int y = 0; y < tickets.size(); y++) {
-                        Ticket t = tickets.get(y);
-                        soldSeats.add(t.getSeatName());
-                    }
 
                     seatno.setVisibility(View.VISIBLE);
                     buyticket.setVisibility(View.VISIBLE);
@@ -138,11 +140,11 @@ public class SelectSeatActivity extends AppCompatActivity {
             public void onClick(View v) {
                 SharedPreferences sharedPreferences = getSharedPreferences("keys", Context.MODE_PRIVATE);
                 String jwt = sharedPreferences.getString("jwt", "");
-                String id = sharedPreferences.getString("id","");
+                String id = sharedPreferences.getString("id", "");
                 User user = new User();
-               // user.setMail(mail);
+                // user.setMail(mail);
                 user.setId(id);
-                Ticket ticket = new Ticket(seatno.getText().toString(),selectedCategory, user);
+                Ticket ticket = new Ticket(seatno.getText().toString(), selectedCategory, user);
 
                 TicketApiInterface apiService = RetrofitBuilder.returnService();
                 Call<Void> call = apiService.createTicket(jwt, ticket);

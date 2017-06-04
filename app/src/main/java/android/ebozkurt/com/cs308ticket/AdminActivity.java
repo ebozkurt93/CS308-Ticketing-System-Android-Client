@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.ebozkurt.com.cs308ticket.domain.Event;
+import android.ebozkurt.com.cs308ticket.domain.Ticket;
 import android.ebozkurt.com.cs308ticket.domain.User;
 import android.ebozkurt.com.cs308ticket.network.RetrofitBuilder;
 import android.ebozkurt.com.cs308ticket.network.TicketApiInterface;
@@ -23,7 +24,7 @@ import retrofit2.Response;
 
 public class AdminActivity extends AppCompatActivity {
 
-    private Button getallusers, addadmin, removeadmin, addevent, removeevent, getallevents;
+    private Button getallusers, addadmin, removeadmin, addevent, removeevent, getallevents, getalltickets;
     private EditText email, eventid;
 
     @Override
@@ -39,6 +40,7 @@ public class AdminActivity extends AppCompatActivity {
         removeevent = (Button) findViewById(R.id.activity_admin_removeevent_button);
         eventid = (EditText) findViewById(R.id.activity_admin_eventid_edittext);
         getallevents = (Button) findViewById(R.id.activity_admin_eventlist_button);
+        getalltickets = (Button) findViewById(R.id.activity_admin_getalltickets_button);
 
         getallusers.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -186,6 +188,33 @@ public class AdminActivity extends AppCompatActivity {
                     @Override
                     public void onFailure(Call<ArrayList<Event>> call, Throwable t) {
                         Toast.makeText(AdminActivity.this, "Failed", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+
+        getalltickets.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences sharedPreferences = getSharedPreferences("keys", Context.MODE_PRIVATE);
+                String jwt = sharedPreferences.getString("jwt", "");
+
+                TicketApiInterface apiService = RetrofitBuilder.returnService();
+                Call<ArrayList<Ticket>> call = apiService.getAllTickets(jwt);
+                call.enqueue(new Callback<ArrayList<Ticket>>() {
+                    @Override
+                    public void onResponse(Call<ArrayList<Ticket>> call, Response<ArrayList<Ticket>> response) {
+                        Toast.makeText(AdminActivity.this, "Successful", Toast.LENGTH_SHORT).show();
+                        Intent i = new Intent(AdminActivity.this, TicketListActivity.class);
+                        ArrayList<Ticket> tickets = response.body();
+                        Log.i("dev", response.toString());
+                        i.putExtra("ticketlist", tickets);
+                        startActivity(i);
+                    }
+
+                    @Override
+                    public void onFailure(Call<ArrayList<Ticket>> call, Throwable t) {
+
                     }
                 });
             }
