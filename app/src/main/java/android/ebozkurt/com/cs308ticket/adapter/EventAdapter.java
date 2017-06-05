@@ -7,6 +7,7 @@ import android.ebozkurt.com.cs308ticket.R;
 import android.ebozkurt.com.cs308ticket.domain.Category;
 import android.ebozkurt.com.cs308ticket.domain.Event;
 import android.support.v7.widget.RecyclerView;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,6 +44,8 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
             actor = (TextView) itemView.findViewById(R.id.event_card_actor);
 
             image = (ImageView) itemView.findViewById(R.id.event_card_imageview);
+
+
 
 
 

@@ -9,6 +9,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -34,6 +35,8 @@ public class EventActivity extends AppCompatActivity {
         name = (TextView) findViewById(R.id.activity_event_name_textview);
         info = (TextView) findViewById(R.id.activity_event_info_textview);
         actor = (TextView) findViewById(R.id.activity_event_actor_textview);
+        info.setMovementMethod(new ScrollingMovementMethod());
+
 
         name.setText(Html.fromHtml("<b>Name:</b> " + event.getName()));
         info.setText(Html.fromHtml("<b>Info:</b> " + event.getInfo()));
