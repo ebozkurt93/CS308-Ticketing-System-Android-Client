@@ -81,16 +81,16 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.ViewHolder
         TextView priceTextView = viewHolder.price;
 
 
-        categoryTextView.setText(ticket.getCategory().getName());
-        priceTextView.setText(ticket.getCategory().getPrice());
-        emailTextView.setText(ticket.getUser().getMail());
+        categoryTextView.setText("Category: " + ticket.getCategory().getName());
+        priceTextView.setText("Price: " + ticket.getCategory().getPrice());
+        emailTextView.setText("Email: " + ticket.getUser().getMail());
 
         TicketApiInterface apiService = RetrofitBuilder.returnService();
         Call<Event> call = apiService.getEvent(ticket);
         call.enqueue(new Callback<Event>() {
             @Override
             public void onResponse(Call<Event> call, Response<Event> response) {
-                nameTextView.setText(response.body().getName());
+                nameTextView.setText("Event name: " + response.body().getName());
 
             }
 

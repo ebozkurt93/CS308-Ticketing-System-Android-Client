@@ -102,7 +102,7 @@ public class AdminActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<ArrayList<User>> call, Throwable t) {
-                        Toast.makeText(AdminActivity.this, "Failed", Toast.LENGTH_SHORT).show();
+                   //     Toast.makeText(AdminActivity.this, "Failed", Toast.LENGTH_SHORT).show();
 
                     }
                 });
@@ -130,7 +130,7 @@ public class AdminActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<ArrayList<User>> call, Throwable t) {
-                        Toast.makeText(AdminActivity.this, "Failed", Toast.LENGTH_SHORT).show();
+                    //    Toast.makeText(AdminActivity.this, "Failed", Toast.LENGTH_SHORT).show();
 
                     }
                 });

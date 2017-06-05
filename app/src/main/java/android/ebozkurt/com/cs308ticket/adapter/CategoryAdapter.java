@@ -36,7 +36,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
         // We also create a constructor that accepts the entire item row
         // and does the view lookups to find each subview
-        public ViewHolder(View itemView) {
+        public ViewHolder(final View itemView) {
             // Stores the itemView in a public final member variable that can be used
             // to access the context from any ViewHolder instance.
             super(itemView);
@@ -47,7 +47,29 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
             endseat = (TextView) itemView.findViewById(R.id.category_add_card_endseat_edittext);
             add = (ImageButton) itemView.findViewById(R.id.category_add_card_add_button);
             remove = (ImageButton) itemView.findViewById(R.id.category_add_card_remove_button);
+
+            add.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                   //todo categorylist = getAllCategories();
+                    //notifyDataSetChanged();
+                    Category c = new Category();
+                    categorylist.add(c);
+                    notifyItemInserted(getItemCount() - 1);
+                    notifyDataSetChanged();
+                }
+            });
+
+            remove.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    categorylist.remove(getAdapterPosition());
+                    notifyDataSetChanged();
+                }
+            });
         }
+
+
     }
 
     private ArrayList<Category> categorylist;
@@ -77,7 +99,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder viewHolder, final int position) {
+    public void onBindViewHolder(final ViewHolder viewHolder, final int position) {
         // Get the data model based on position
         final Category category = categorylist.get(position);
 
@@ -95,12 +117,14 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         priceTextView.setText(category.getPrice());
         startSeatTextView.setText(category.getStartSeat());
         endSeatTextView.setText(category.getEndSeat());
-
+/*
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                categorylist = getAllCategories(viewHolder);
                 Category c = new Category();
                 categorylist.add(c);
+                notifyItemInserted(getItemCount() - 1);
                 notifyDataSetChanged();
             }
         });
@@ -112,7 +136,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
                 notifyDataSetChanged();
             }
         });
-
+*/
 
     }
 
@@ -122,11 +146,11 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     }
 
 
-
     public ArrayList<Category> getAllCategories(CategoryAdapter.ViewHolder viewHolder) {
         ArrayList<Category> categories = new ArrayList<>();
 
-        for(int i = 0; i < getItemCount(); i++ ) {
+        for (int i = 0; i < getItemCount(); i++) {
+            //Category c = getCategory(viewHolder);
             onBindViewHolder(viewHolder, i);
             Category c = new Category(viewHolder.startseat.getText().toString(), viewHolder.endseat.getText().toString(), viewHolder.name.getText().toString(), viewHolder.price.getText().toString());
             categories.add(c);

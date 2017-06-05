@@ -81,15 +81,15 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         TextView passwordTextView = viewHolder.password;
 
 
-        nameTextView.setText(user.getName());
-        lastnameTextView.setText(user.getSurname());
-        emailTextView.setText(user.getMail());
-        passwordTextView.setText(user.getPassword());
-        idTextView.setText(user.getId());
-        roleTextView.setText(user.getRole());
+        nameTextView.setText("Name: " + user.getName());
+        lastnameTextView.setText("Lastname: " + user.getSurname());
+        emailTextView.setText("Email: " + user.getMail());
+        passwordTextView.setText("Password: " + user.getPassword());
+        idTextView.setText("Id: " + user.getId());
+        roleTextView.setText("Role: " + user.getRole());
         //Log.i("dev", user.getRole());
-        nameTextView.setText(user.getName());
-        addressTextView.setText(user.getAddress());
+      //  nameTextView.setText(user.getName());
+      //  addressTextView.setText(user.getAddress());
     }
 
     @Override

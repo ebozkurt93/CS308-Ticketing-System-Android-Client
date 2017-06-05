@@ -41,8 +41,11 @@ public class AddEventActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_event);
 
         categorylist = new ArrayList<Category>();
-        Category c = new Category("1","20","VIP","100");
+        Category c = new Category("1","200","All","100");
+        Category c2 = new Category("21","100","Category 2","80");
+        Category c3 = new Category("101","250","Category 3","60");
         categorylist.add(c);
+
 
         final RecyclerView recyclerView = (RecyclerView) findViewById(R.id.activity_add_category_recyclerview);
         final CategoryAdapter categoryAdapter = new CategoryAdapter(this, categorylist);

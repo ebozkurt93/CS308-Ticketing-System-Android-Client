@@ -27,11 +27,13 @@
         android:id="@+id/activity_login_password_textinputlayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:passwordToggleEnabled="true"
         android:hint="password"
         app:layout_constraintRight_toRightOf="parent">
 
         <EditText
             android:id="@+id/activity_login_password_edittext"
+            android:inputType="textPassword"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 
